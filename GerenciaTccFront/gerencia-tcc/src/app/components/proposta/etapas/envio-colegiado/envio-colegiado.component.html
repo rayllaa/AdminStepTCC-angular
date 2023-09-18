@@ -1,0 +1,173 @@
+<div class="step-alert">
+  <ng-container *ngIf="!envioProposta">
+    <mat-card class="card-alert" *ngIf="usuario.cargo == 'PROFESSOR' || usuario.cargo == 'COORDENADOR'">
+      Ainda não foi realizado o cadastro do envio da proposta ao colegiado!
+      <span>Deseja cadastrar?</span>
+        <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="exibirFormularioEnvioProposta()"
+        >
+          cadastrar
+        </button>
+    </mat-card>
+    <mat-card class="card-alert" *ngIf="usuario.cargo == 'ALUNO'">
+      Ainda não foi realizado o cadastro do envio da proposta ao colegiado! 
+      <span>Busque um Orientador!</span>
+    </mat-card>
+  </ng-container>
+
+  <div *ngIf="carregando" class="loading">
+    <h3>Carregando ...</h3>
+    <mat-spinner aria-label="Carregando..."></mat-spinner>
+  </div>
+
+  <ng-container *ngIf="envioProposta && carregando == false">
+    <form
+      [formGroup]="formularioEnvioProposta">
+      <mat-card class="card-form-proposta">
+        <h2>Cadastro Envio Proposta</h2>
+
+        <mat-form-field appearance="outline" class="input-21">
+          <mat-label>Nº Processo</mat-label>
+          <input
+            matInput
+            type="text"
+            id="numeroProcesso"
+            name="numeroProcesso"
+            formControlName="numeroProcesso"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="input-35">
+          <mat-label>Orientando</mat-label>
+          <input
+            matInput
+            type="text"
+            id="aluno"
+            name="aluno"
+            formControlName="aluno"
+            [matAutocomplete]="aluno"
+          />
+          <mat-autocomplete #aluno="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let aluno of filtroAluno | async" [value]="aluno">
+              {{ aluno.nome }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="input-35">
+          <mat-label>Orientador</mat-label>
+          <input
+            matInput
+            type="text"
+            id="professor"
+            name="professor"
+            formControlName="professor"
+            [matAutocomplete]="professor"
+          />
+          <mat-autocomplete #professor="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let professor of filtroProfessor | async" [value]="professor">
+              {{ professor.nome }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+       
+        <mat-form-field appearance="outline" class="input-47">
+          <mat-label>Tema Proposta</mat-label>
+          <input
+            matInput
+            type="text"
+            id="tema"
+            name="tema"
+            formControlName="tema"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="input-13">
+          <mat-label>Envio proposta</mat-label>
+          <input
+            matInput
+            type="date"
+            id="dataEnvioColegiado"
+            name="dataEnvioColegiado"
+            formControlName="dataEnvioColegiado"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="input-13">
+          <mat-label>Avaliação colegiado</mat-label>
+          <input
+            matInput
+            type="date"
+            id="dataAvaliacaoColegiado"
+            name="dataAvaliacaolegiado"
+            formControlName="dataAvaliacaoColegiado"
+          />
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="input-17">
+          <mat-label>Parecer colegiado</mat-label>
+          <mat-select formControlName="statusParecerColegiado">
+            <mat-option value="Em espera">Em espera</mat-option>
+            <mat-option value="Aprovado">Aprovado</mat-option>
+            <mat-option value="Aprovado Parcial">Aprovado Parcial</mat-option>
+            <mat-option value="Reprovado">Reprovado</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="input-52">
+          <mat-label>Observação</mat-label>
+          <input
+            matInput
+            type="text"
+            id="observacaoColegiado"
+            name="observacaoColegiado"
+            formControlName="observacaoColegiado"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="input-40">
+          <mat-label>Link Ata</mat-label>
+          <input
+            matInput
+            type="text"
+            id="linkAta"
+            name="linkAta"
+            formControlName="linkAta"
+          />
+        </mat-form-field>
+
+        <div class="button">
+          <div *ngIf="btnCadastrarProposta == true && (usuario.cargo == 'PROFESSOR' || usuario.cargo == 'COORDENADOR')"> 
+            <button
+              *ngIf="proposta == null "
+              mat-raised-button
+              color="primary"
+              type="submit"
+              (click)="cadastrarEnvioProposta()"
+            >
+              cadastrar
+            </button>
+
+            <button
+              *ngIf="btnEditarVisivel && proposta != null && proposta.statusEtapaEnvioProposta == true && proposta.statusEtapaFinalizacao == false && proposta.professor.id == usuario.id"
+              mat-raised-button
+              color="secundary"
+              (click)="editar(formularioEnvioProposta)"
+            >
+              {{ btnEditar }}
+            </button>
+          </div>
+        
+          <button
+            *ngIf="proposta != null && (proposta.statusParecerColegiado === 'Aprovado' || proposta.statusParecerColegiado === 'Aprovado Parcial')"
+            mat-raised-button
+            color="primary"
+            matStepperNext class="btn-avancar"
+          >
+            avançar
+          </button>
+        </div>
+      </mat-card>
+    </form>
+  </ng-container>
+</div>

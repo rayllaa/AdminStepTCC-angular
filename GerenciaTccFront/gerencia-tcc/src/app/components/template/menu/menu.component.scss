@@ -1,0 +1,23 @@
+@import '../../../../styles.scss'; 
+
+.sidenav{
+    background-color: #FCFCFC; //#FFFFFD;
+    width: 175px;
+    align-items: center;
+    padding: 20px 5px 0px 20px;
+    a{
+        color: rgba(0, 0, 0, 0.781);
+        display: flex;
+        text-decoration: none;
+        margin-top: 10px;
+
+        span{
+            margin-left: 5px;
+        }
+    }
+}
+
+.content{
+    padding: 16px;
+    background-color: #FFF;
+}

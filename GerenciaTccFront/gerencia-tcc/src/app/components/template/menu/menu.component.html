@@ -1,0 +1,56 @@
+<mat-sidenav-container>
+  <mat-sidenav
+    class="sidenav"
+    mode="side"
+    opened
+    fixedInViewport="true"
+    fixedTopGap="64"
+  >
+    <mat-nav-list class="nav-list">
+      <a mat-list-item routerLink="/home">
+        <mat-icon>home</mat-icon>
+        <span>Início</span>
+      </a>
+      <div *ngIf="usuario.cargo == 'ALUNO'">
+        <a mat-list-item routerLink="/proposta">
+          <mat-icon>library_books</mat-icon>
+          <span>Proposta</span>
+        </a>
+      </div>
+
+      <div *ngIf="usuario.cargo == 'PROFESSOR' || usuario.cargo == 'COORDENADOR'">
+        <a mat-list-item routerLink="/propostas">
+          <mat-icon>library_books</mat-icon>
+          <span>Propostas</span>
+        </a>
+
+        <a mat-list-item routerLink="/alunos">
+          <mat-icon>school</mat-icon>
+          <span>Alunos</span>
+        </a>       
+      </div>
+
+      <div *ngIf="usuario.cargo == 'COORDENADOR'">
+        <a mat-list-item routerLink="/cursos">
+          <mat-icon>book</mat-icon>
+          <span>Cursos</span>
+        </a>
+  
+        <a mat-list-item routerLink="/areas">
+          <mat-icon>local_library</mat-icon> 
+          <span>Áreas</span>
+        </a>      
+      </div>
+
+      <a mat-list-item routerLink="/professores">
+        <mat-icon>people</mat-icon>
+        <span>Professores</span>
+      </a>
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="content">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

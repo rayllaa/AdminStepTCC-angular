@@ -1,0 +1,29 @@
+// @import '../../../../assets/styles/theme.scss'; 
+@import '../../../../styles.scss'; 
+
+.space {
+    flex: 1 1 auto;
+  }
+
+.usuario{
+    font-size: medium;
+    margin-right: 10px;
+    font-weight: 500;
+}
+
+mat-option{
+    font-size: small !important;
+    font-weight: 430;
+}
+
+.dropdown{
+    margin-right: 15px;
+}
+
+.mat-icon-user{
+    margin-bottom: -4px;
+}
+
+.icon-pointer {
+    cursor: pointer;
+}

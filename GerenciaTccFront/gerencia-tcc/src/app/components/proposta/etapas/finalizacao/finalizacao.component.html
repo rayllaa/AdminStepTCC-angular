@@ -1,0 +1,66 @@
+<ng-container *ngIf="!finalizacao">
+  <mat-card class="card-alert" *ngIf="usuario.cargo == 'PROFESSOR' || usuario.cargo == 'COORDENADOR'">
+    Ainda não foi realizado o cadastro do finalizacao do TCC!
+    <span>Deseja cadastrar?</span>
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="exibirFormularioCadastroFinalizacao()"
+    >
+      cadastrar
+    </button>
+  </mat-card>
+  <mat-card class="card-alert" *ngIf="usuario.cargo == 'ALUNO'">
+    Ainda não foi realizado o cadastro do finalizacao do TCC!
+  </mat-card>
+</ng-container>
+
+<ng-container *ngIf="proposta != null && proposta.statusEtapaFinalizacao == true">
+  <mat-card class="card-alert" *ngIf="usuario.cargo == 'PROFESSOR' || usuario.cargo == 'COORDENADOR'">
+    <span>Parabéns, o TCC deste aluno foi concluído!  </span>        
+  </mat-card>
+  <mat-card class="card-alert" *ngIf="usuario.cargo == 'ALUNO'">
+    <span>Parabéns, você finalizou seu TCC!</span>
+    <p>Informe-se com a coordenação sobre a retirada do seu diploma!</p>
+  </mat-card>
+</ng-container>
+
+<ng-container *ngIf="finalizacao">
+  <form [formGroup]="formularioFinalizacao">
+    <mat-card class="card-form-proposta">
+      <h2>Entrega de documentos finais</h2>
+      <mat-form-field appearance="outline" class="input-15">
+        <mat-label>Data</mat-label>
+        <input
+          matInput
+          type="date"
+          id="dataEntregaDocumentosFinais"
+          name="dataEntregaDocumentosFinais"
+          formControlName="dataEntregaDocumentosFinais"
+        />
+      </mat-form-field>
+
+      <div class="button">
+        <button
+          *ngIf="proposta.statusEtapaFinalizacao == false && usuario.cargo == 'PROFESSOR' || usuario.cargo == 'COORDENADOR'"
+          mat-raised-button
+          color="primary"
+          type="submit"
+          (click)="cadastrarFinalizacao()"
+        >
+          cadastrar
+        </button>
+        <!-- <button
+          *ngIf="proposta.statusEtapaFinalizacao == true && usuario.cargo == 'PROFESSOR' || usuario.cargo == 'COORDENADOR'"
+          mat-raised-button
+          color="secundary"
+          (click)="editar(formularioFinalizacao)" class="btn-avancar"
+        >
+          {{ btnEditar }}
+        </button> -->
+      
+      </div>
+    </mat-card>
+  </form>
+</ng-container>

@@ -1,0 +1,55 @@
+<app-content>
+    <mat-card class="card-areas">
+      <h2>Áreas</h2>
+  
+      <mat-form-field>
+        <input
+          type="text"
+          placeholder="Pesquisar"
+          [(ngModel)]="filtro"
+          (input)="aplicarFiltro()"
+          matInput
+        />
+      </mat-form-field>
+  
+      <div *ngIf="carregando" class="loading">
+        <h3>Carregando ...</h3>
+        <mat-spinner aria-label="Carregando..."></mat-spinner>
+      </div>
+  
+      <div *ngIf="carregando == false">
+        <table mat-table [dataSource]="dataSourceArea" class="mat-elevation-z8">
+          <ng-container matColumnDef="Área">
+            <th mat-header-cell *matHeaderCellDef>Área</th>
+            <td mat-cell *matCellDef="let area">{{ area.area }}</td>
+          </ng-container>
+    
+          <ng-container matColumnDef=" ">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let area">
+              <div (click)="consultarArea(area)" routerLink="/consultar-area">
+                <mat-icon>search</mat-icon>
+              </div>
+            </td>
+          </ng-container>
+    
+          <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+          <tr mat-row *matRowDef="let row; columns: colunas"></tr>      
+        </table>
+        <mat-paginator [length]="dataSourceAreaFiltrado.data.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" (page)="onPageChange($event)"></mat-paginator>
+      </div>
+
+      <div class="button">
+        <button
+            mat-raised-button
+            color="primary"
+            (click)="cadastrarArea()"
+            routerLink="/cadastrar-area"
+        >
+            cadastrar
+      </button>
+      </div>
+      
+    </mat-card>
+  </app-content>
+  

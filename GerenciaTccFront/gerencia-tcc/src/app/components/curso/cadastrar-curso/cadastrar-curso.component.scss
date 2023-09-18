@@ -1,0 +1,55 @@
+.card-curso{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 1%;
+    width: 50%;
+
+    h2{
+        margin-bottom: 5%;
+        font-weight: 450;
+    }
+
+    button{
+        margin-left: 10px;
+    }
+
+}
+
+.button-voltar{
+    display: flex;
+    align-items: left;    
+}
+
+.custom-file-input {
+    position: relative;
+    display: inline;
+  }
+  
+  .custom-file-button {
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Esconda a tag de input nativa */
+  .custom-file-input input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+  
+  .selected-file {
+    display: inline-block;
+    margin-left: 5px;
+    margin-top: 8px;
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  

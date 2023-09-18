@@ -1,0 +1,41 @@
+<app-content>
+    <mat-card class="card-curso">
+        <h2>Cadastro Curso</h2>
+        <form [formGroup]="formularioCadastroCurso">
+            <mat-form-field appearance="outline" class="input-47">
+                <mat-label>Curso</mat-label>
+                <input matInput type="text" id="nome" name="nome" formControlName="nome">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="input-47">
+                <mat-label>Instituição de Ensino</mat-label>
+                <input matInput type="text" id="instituicao" name="instituicao" formControlName="instituicao">
+            </mat-form-field>
+
+            <div class="custom-file-input">
+                <input class="custom-file-button" type="file" accept="image/*" required id="logoPath" name="logoPath" (change)="onFileSelected($event)" formControlName="logoPath">
+                <mat-icon matSuffix>attach_file</mat-icon>
+                <span class="selected-file" id="selectedFileLabel"></span>
+            </div>
+
+            <div class="button">
+                <button
+                mat-raised-button
+                color="primary"
+                routerLink="/cursos" class="button-voltar"
+                >
+                voltar
+                </button>
+
+                <button *ngIf="btnCadastrar"
+                mat-raised-button
+                color="primary"
+                (click)="cadastrar()"
+                >
+                cadastrar
+                </button>
+            </div>
+        </form>
+               
+      </mat-card>
+</app-content>

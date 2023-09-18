@@ -1,0 +1,32 @@
+<app-content>
+  <div *ngIf="carregando" class="loading">
+    <h3>Carregando ...</h3>
+    <mat-spinner aria-label="Carregando..."></mat-spinner>
+  </div>
+
+  <div class="steps">
+    <mat-stepper orientation="horizontal"  *ngIf="carregando == false" linear>
+
+      <mat-step label="Envio Proposta" [stepControl]="formularioEnvioProposta">
+        <app-envio-colegiado></app-envio-colegiado>
+      </mat-step>
+
+      <mat-step label="TCC em Andamento"  [stepControl]="formularioDesenvolvimento">
+        <app-desenvolvimento></app-desenvolvimento>
+      </mat-step>
+      
+      <mat-step label="Qualificação">
+        <app-qualificacao></app-qualificacao>
+      </mat-step>
+      
+      <mat-step label="Defesa">
+        <app-defesa></app-defesa>
+      </mat-step>
+      
+      <mat-step label="Encerramento">
+        <app-finalizacao></app-finalizacao>
+      </mat-step>
+      
+    </mat-stepper>
+  </div>
+</app-content>

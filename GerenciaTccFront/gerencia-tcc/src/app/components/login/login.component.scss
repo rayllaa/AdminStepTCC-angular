@@ -1,0 +1,82 @@
+@import '../../../assets/styles/theme.scss'; 
+
+.div-login{
+    margin-top: 5%;
+    text-align: center;
+    width: 50%;
+    mat-card{
+        padding: 30px 45px 30px 45px;
+    }
+}
+
+.div-agenda-publica{
+    margin-top: 5%;
+    margin: 5%;
+    margin-right: 10%;
+    text-align: center;
+    width: 33%;
+    mat-card{
+        padding: 30px 45px 30px 45px;
+    }
+}
+
+.mat-form-field{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-login{
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    margin-bottom: 30px;
+}
+
+a{
+    color: #FFB600;
+}
+
+.logo-login{
+    margin-top: 5%;
+    text-align: center;
+    width: 50%;
+   
+    img{
+        width: 50%;
+    }
+    
+    p{
+        width: 70%;
+    }
+
+    h4{
+        width: 60%;
+        font-size: small;
+    }
+    
+}
+
+.validacao-input{
+    color: red;
+    text-align: left;
+    font-size: 12px;
+}
+
+.tabela-agenda {
+    font-size: 80%; /* Defina o tamanho da fonte desejado */
+    td {
+        white-space: nowrap;
+        //word-wrap: break-word;
+    }
+}
+
+.card{
+    margin: 10px !important;
+}
+
+.tabela-container {
+    max-height: 300px; /* Altura máxima para a barra de rolagem vertical */
+    overflow-x: auto; /* Barra de rolagem horizontal somente quando necessário */
+    overflow-y: auto; /* Barra de rolagem vertical somente quando necessário */
+}

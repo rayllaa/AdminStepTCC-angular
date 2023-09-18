@@ -1,0 +1,71 @@
+.card-cursos{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 5%;
+    width: 50%;
+
+    h2{
+        margin-bottom: 5%;
+        font-weight: 450;
+    }
+
+    table{
+        width: 100%;
+        text-align: center;
+        margin-top: 2%;
+    }
+
+    mat-form-field{
+        justify-content: end;
+    }
+
+    button{
+        margin-left: 10px;
+    }
+}
+
+td{
+    padding-left: 40px;
+    
+}
+
+th{
+    align-items: center;
+}
+
+.mat-icon-filter{
+    margin-bottom: -8px;
+}
+
+.icon-pointer {
+    cursor: pointer;
+}
+
+.mat-select-filter{
+    size: 5px;
+    padding-bottom: 0%;
+}
+
+::ng-deep .mat-select-arrow-wrapper {
+    display: none !important;
+}
+
+.count-filter{
+    font-size: 12px;
+}
+
+.button{
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    margin: 60px 1% 40px 40px;
+}
+
+.loading{
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

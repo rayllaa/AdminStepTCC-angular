@@ -1,0 +1,49 @@
+<app-content>
+    <mat-card class="card-curso">
+        <h2>Curso</h2>
+        <form [formGroup]="formularioConsultaCurso">
+                <mat-form-field appearance="outline" class="input-12">
+                    <mat-label>Id</mat-label>
+                    <input matInput type="text" id="id" name="id" formControlName="id">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="input-52">
+                    <mat-label>Curso</mat-label>
+                    <input matInput type="text" id="nome" name="nome" formControlName="nome">
+                </mat-form-field>
+
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <img class="input-12" id="logo-image" class="input-12" [src]="curso.logo" alt="Logo do Curso">
+                           
+                <mat-form-field appearance="outline" class="input-52">
+                  <mat-label>Instituição de Ensino</mat-label>
+                  <input matInput type="text" id="instituicao" name="instituicao" formControlName="instituicao">
+                </mat-form-field>  
+                <div class="custom-file-input" *ngIf="btnEditar == 'salvar'">
+                    <input type="file" accept="image/*" id="logoPath" name="logoPath" (change)="onFileSelected($event)" formControlName="logoPath">
+                    <mat-icon matSuffix>attach_file</mat-icon>
+                </div> 
+            </div>
+            <span class="selected-file" id="selectedFileLabel"></span>
+
+            <div class="button">
+                <button
+                mat-raised-button
+                color="primary"
+                routerLink="/cursos" class="button-voltar"
+                >
+                voltar
+                </button>
+
+                <button
+                mat-raised-button
+                color="primary"
+                (click)="editar(formularioConsultaCurso)"
+                >
+                {{ btnEditar }}
+                </button>
+            </div>
+        </form>
+               
+      </mat-card>
+</app-content>

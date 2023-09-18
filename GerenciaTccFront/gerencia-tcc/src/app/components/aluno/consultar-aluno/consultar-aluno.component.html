@@ -1,0 +1,68 @@
+<app-content>
+    <mat-card class="card-aluno">
+        <h2>{{aluno.nome}}</h2>
+        <form [formGroup]="formularioConsultaAluno">
+
+            <mat-form-field appearance="outline" class="input-20">
+                <mat-label>Prontuário</mat-label>
+                <input matInput type="text" id="prontuario" name="prontuario" formControlName="prontuario">
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline" class="input-50">
+                <mat-label>Nome</mat-label>
+                <input matInput type="text" id="nome" name="nome" formControlName="nome">
+            </mat-form-field>
+                           
+            <mat-form-field appearance="outline" class="input-50">
+                <mat-label>E-mail</mat-label>
+                <input matInput type="text" id="email" name="email" formControlName="email">
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" class="input-20">
+                <mat-label>Celular</mat-label>
+                <input matInput type="text" id="celular" name="celular" mask="(00) 00000 - 0000" formControlName="celular">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="input-39">
+                <mat-label>Curso</mat-label>
+                <input matInput type="text" id="curso" name="curso" formControlName="curso" readonly>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="input-15">
+                <mat-label>Ano Ingresso</mat-label>
+                <input matInput type="number" id="anoIngresso" name="anoIngresso" formControlName="anoIngresso" min="2012" max="2023">
+                <mat-hint mat-hint>min: 2012 max: 2023 </mat-hint> 
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="input-15">
+                <mat-label>Semestre Atual</mat-label>
+                <input matInput type="number" id="semestreAtual" name="semestreAtual" formControlName="semestreAtual" min="1" max="20">
+                <mat-hint mat-hint>min: 1 max: 20 </mat-hint> 
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="input-70">
+                <mat-label>Áreas Interesse</mat-label>
+                <input matInput type="text" id="areasInteresse" name="areasInteresse" formControlName="areasInteresse" [(ngModel)]="areasSelecionadasStr">
+            </mat-form-field>
+
+            <div class="button" *ngIf="usuario.cargo == 'PROFESSOR' || usuario.cargo == 'COORDENADOR'">
+                <button
+                mat-raised-button
+                color="primary"
+                routerLink="/alunos" class="button-voltar"
+                >
+                voltar
+                </button>
+                <!-- <button
+                mat-raised-button
+                color="primary"
+                (click)="consultarProposta()" 
+                routerLink="/proposta"
+                >
+                proposta
+                </button> -->
+            </div>
+        </form>
+               
+      </mat-card>
+</app-content>

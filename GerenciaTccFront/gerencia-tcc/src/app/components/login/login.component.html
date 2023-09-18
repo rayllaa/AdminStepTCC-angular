@@ -1,0 +1,70 @@
+<app-header [visivel]="visivel"></app-header>
+<form [formGroup]="formulario">
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <div fxLayout="column" fxLayoutAlign="start center" class="logo-login">
+            <img src="assets/img/logo_diploma.png"  alt="logo">
+            <div>
+                
+            </div>
+            <h2>Sistema de Gerenciamento de TCC</h2>
+            <h4>Aqui você conseguirá buscar orientadores e acompanhar 
+                o andamento do seu Trabalho de Conclusão de Curso (TCC)</h4>
+        </div>
+        <div  fxLayout="column" fxLayoutAlign="center center"  class="div-login">
+            <mat-card>
+                <mat-form-field class="mat-form-field" appearance="outline">
+                    <mat-label>Usuário</mat-label>
+                    <input matInput type="text" id="usuario" name="usuario" formControlName="usuario">
+                    <mat-error *ngIf="formulario.get('usuario') == null">
+                        Campo usuário obrigatório!
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="mat-form-field" appearance="outline">
+                    <mat-label>Senha</mat-label>
+                    <input matInput type="password" id="senha" name="senha" formControlName="senha">
+                    <mat-error *ngIf="formulario.get('senha') == null">
+                        Campo senha obrigatório!
+                    </mat-error>
+                </mat-form-field>
+        
+                <div class="button-login">
+                    <button mat-raised-button color="primary" type="button" (click)="login()">login</button>
+                </div>
+        
+                <p> Não possui cadastro?</p>
+                <a routerLink="/cadastro" target="_blank">Cadastre-se aqui</a>
+            </mat-card>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="start start" class="div-agenda-publica" *ngIf="propostasFiltradas != null && propostasFiltradas.length > 0">                     
+            <mat-card class="tabela-container">
+                <h4><b>Agenda Pública Bancas de Tcc</b></h4>
+
+                <table mat-table [dataSource]="propostasFiltradas" matSort class="tabela-agenda">
+                    <ng-container matColumnDef="Data">
+                        <th *matHeaderCellDef>Data</th>
+                        <td *matCellDef="let proposta">{{ proposta.dataBanca }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="Tema">
+                        <th *matHeaderCellDef>Tema</th>
+                        <td *matCellDef="let proposta">{{ proposta.tema }}</td>
+                    </ng-container>
+                    <!-- <ng-container matColumnDef="Orientando">
+                        <th *matHeaderCellDef>Orientando</th>
+                        <td *matCellDef="let proposta">{{ proposta.aluno.nome }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="Orientador">
+                        <th *matHeaderCellDef>Orientador</th>
+                        <td *matCellDef="let proposta">{{ proposta.professor.nome }}</td>
+                    </ng-container> -->
+                    <ng-container matColumnDef="Local">
+                        <th *matHeaderCellDef>Local</th>
+                        <td *matCellDef="let proposta">{{ proposta.local }}</td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+                    <tr mat-row *matRowDef="let row; columns: colunas"></tr>
+                </table>
+            </mat-card>
+        </div>
+    </div>    
+</form>

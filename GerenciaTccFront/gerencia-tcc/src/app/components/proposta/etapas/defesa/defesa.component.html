@@ -1,0 +1,120 @@
+<ng-container *ngIf="!defesa">
+  <mat-card class="card-alert" *ngIf="usuario.cargo == 'PROFESSOR' || usuario.cargo == 'COORDENADOR'">
+    Ainda não foi realizado o cadastro da defesa do TCC!
+    <span>Deseja cadastrar?</span>
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="exibirFormularioCadastroDefesa()"
+    >
+      cadastrar
+    </button>
+  </mat-card>
+  <mat-card class="card-alert" *ngIf="usuario.cargo == 'ALUNO'">
+    Ainda não foi realizado o cadastro da defesa do TCC!
+  </mat-card>
+</ng-container>
+
+<ng-container *ngIf="defesa">
+  <form [formGroup]="formularioDefesa">
+    <mat-card class="card-form-proposta">
+      <h2>Cadastro Defesa</h2>
+
+      <mat-form-field appearance="outline" class="input-15">
+        <mat-label>Modalidade</mat-label>
+        <mat-select formControlName="modalidadeDefesa">
+          <mat-option value="presencial">Presencial</mat-option>
+          <mat-option value="online">Online</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="input-30">
+        <mat-label>Local</mat-label>
+        <input
+          matInput
+          type="text"
+          id="localDefesa"
+          name="localDefesa"
+          formControlName="localDefesa"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="input-15">
+        <mat-label>Data</mat-label>
+        <input
+          matInput
+          type="date"
+          id="dataDefesa"
+          name="dataDefesa"
+          formControlName="dataDefesa"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="input-10">
+        <mat-label>Horário</mat-label>
+        <input
+          matInput
+          type="time"
+          id="horarioDefesa"
+          name="horarioDefesa"
+          formControlName="horarioDefesa"
+        />
+      </mat-form-field>
+     
+      <mat-form-field appearance="outline" class="input-59">
+        <mat-label>Banca</mat-label>
+        <mat-select formControlName="integrantesBancaDefesa" multiple>
+          <mat-select-trigger>
+            <ng-container  *ngIf="integrantesBancaDefesa.value && integrantesBancaDefesa.value.length > 0">
+              {{ getSelectedProfessores() }}
+            </ng-container>
+          </mat-select-trigger>
+          <mat-option *ngFor="let professor of professores" [value]="professor.nome">{{ professor.nome }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+     
+      <mat-form-field appearance="outline" class="input-13">
+        <mat-label>Status parecer</mat-label>
+        <mat-select formControlName="statusParecerDefesa">
+          <mat-option value="Em espera">Em espera</mat-option>
+          <mat-option value="Aprovado">Aprovado</mat-option>
+          <mat-option value="Aprovado Parcial">Aprovado Parcial</mat-option>
+          <mat-option value="Reprovado">Reprovado</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="button">
+        <div *ngIf="usuario.cargo == 'PROFESSOR' || usuario.cargo == 'COORDENADOR'">
+          <button
+            *ngIf="proposta.statusEtapaDefesa == null || proposta.statusEtapaDefesa == false"
+            mat-raised-button
+            color="primary"
+            type="submit"
+            (click)="cadastrarDefesa()"
+          >
+            cadastrar
+          </button>
+          <button
+            *ngIf="proposta.statusEtapaDefesa != null && proposta.statusEtapaDefesa == true 
+            && proposta.statusEtapaFinalizacao == false && proposta.professor.id == usuario.id"
+            mat-raised-button
+            color="secundary"
+            (click)="editar(formularioDefesa)"
+          >
+            {{ btnEditar }}
+          </button>
+        </div>
+        
+        <button
+          *ngIf="proposta.statusEtapaDefesa != null && proposta.statusEtapaDefesa == true && (proposta.statusParecerDefesa == 'Aprovado' || proposta.statusParecerDefesa == 'Aprovado Parcial')"
+          mat-raised-button
+          color="primary"
+          matStepperNext class="btn-avancar"
+        >
+          avançar
+        </button>
+      </div>
+    </mat-card>
+  </form>
+</ng-container>

@@ -1,0 +1,38 @@
+<mat-sidenav-container>
+    
+</mat-sidenav-container>
+<mat-toolbar class="header">
+    <a routerLink="/" class="link-neutro">
+        <span>
+            <img class="logo" src="assets/img/logo_diploma.png"  alt="logo ">
+        </span>
+        <span>GerenciaTcc</span>
+    </a>
+
+    <span class="space"></span>
+    
+    <span class="usuario">{{ usuario.usuario }}</span>
+    <mat-icon>person</mat-icon>
+    <span class="dropdown">
+        <mat-select>
+            <mat-option>perfil</mat-option>
+            <mat-option routerLink="/" (click)="logoff()">sair</mat-option>
+        </mat-select>
+    </span>
+    
+</mat-toolbar>
+<app-menu [usuario]="usuario"></app-menu>
+
+<div>
+    <div *ngIf="home">
+         <app-home></app-home>
+    </div>
+
+    <div *ngIf="proposta">
+        <app-proposta></app-proposta>
+   </div>
+
+   <div *ngIf="home">
+    <app-home></app-home>
+</div>
+</div>

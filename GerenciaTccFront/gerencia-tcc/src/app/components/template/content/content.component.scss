@@ -1,0 +1,8 @@
+.app-content {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  max-height: 80%;
+}

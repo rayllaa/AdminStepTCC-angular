@@ -1,0 +1,52 @@
+<app-content>
+    <mat-card class="card-professor">
+        <h2>{{professor.nome}}</h2>
+        <form [formGroup]="formularioConsultaProfessor">
+            <mat-form-field appearance="outline" class="input-20">
+                <mat-label>Prontuário</mat-label>
+                <input matInput type="text" id="prontuario" name="prontuario" formControlName="prontuario">
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline" class="input-50">
+                <mat-label>Nome</mat-label>
+                <input matInput type="text" id="nome" name="nome" formControlName="nome">
+            </mat-form-field>
+                           
+            <mat-form-field appearance="outline" class="input-50">
+                <mat-label>E-mail</mat-label>
+                <input matInput type="text" id="email" name="email" formControlName="email">
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" class="input-20">
+                <mat-label>Celular</mat-label>
+                <input matInput type="text" id="celular" name="celular" mask="(00) 00000 - 0000" formControlName="celular">
+            </mat-form-field>
+           
+            <mat-form-field appearance="outline" class="input-35">
+                <mat-label>Áreas Interesse</mat-label>
+                <input matInput type="text" id="areasInteresse" name="areasInteresse" formControlName="areasInteresse" [(ngModel)]="areasSelecionadasStr">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="input-35">
+                <mat-label>Área Atuação</mat-label>
+                <input matInput type="text" id="areaAtuacao" name="areaAtuacao" formControlName="areaAtuacao">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="input-45">
+                <mat-label>Disciplinas Ministradas</mat-label>
+                <input matInput type="text" id="disciplinasMinistradas" name="disciplinasMinistradas" formControlName="disciplinasMinistradas">
+            </mat-form-field>
+
+            <div class="button">
+                <button
+                mat-raised-button
+                color="primary"
+                routerLink="/professores" class="button-voltar"
+                >
+                voltar
+                </button>
+            </div>
+        </form>
+               
+      </mat-card>
+</app-content>

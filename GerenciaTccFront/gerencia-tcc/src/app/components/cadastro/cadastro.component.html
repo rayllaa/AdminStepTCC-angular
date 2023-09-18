@@ -1,0 +1,190 @@
+<app-header></app-header>
+<div class="cadastro">
+  <form [formGroup]="formularioCadastro">
+    <h1>Cadastro</h1>
+    <mat-card>
+      <div>
+        <mat-radio-group formControlName="cargo">
+          <mat-radio-button value="ALUNO">Aluno</mat-radio-button>
+          <mat-radio-button value="PROFESSOR">Professor</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <mat-form-field appearance="outline" class="input-50">
+        <mat-label>Nome</mat-label>
+        <input
+          matInput
+          type="text"
+          id="nome"
+          name="nome"
+          formControlName="nome"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="input-25">
+        <mat-label>Prontuário</mat-label>
+        <input
+          matInput
+          type="text"
+          id="prontuario"
+          name="prontuario"
+          formControlName="prontuario"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="input-50">
+        <mat-label>E-mail</mat-label>
+        <input
+          matInput
+          type="text"
+          id="email"
+          name="email"
+          formControlName="email"
+          [errorStateMatcher]="matcher"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="input-25">
+        <mat-label>Celular</mat-label>
+        <input
+          matInput
+          type="text"
+          id="celular"
+          name="celular"
+          mask="(00) 00000 - 0000"
+          formControlName="celular"
+        />
+      </mat-form-field>
+
+      <ng-container *ngIf="formularioCadastro.get('cargo').value === 'ALUNO'">
+        <mat-form-field appearance="outline" class="input-41">
+          <mat-label>Curso</mat-label>
+          <input
+            matInput
+            type="text"
+            id="curso"
+            name="curso"
+            formControlName="curso"
+            [matAutocomplete]="curso"
+          />
+          <mat-autocomplete #curso="matAutocomplete" [displayWith]="displayFn">
+            <mat-option
+              *ngFor="let curso of filtroCurso | async"
+              [value]="curso"
+            >
+              {{ curso.nome }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="input-15">
+          <mat-label>Ano Ingresso</mat-label>
+          <input
+            matInput
+            type="number"
+            id="anoIngresso"
+            name="anoIngresso"
+            formControlName="anoIngresso"
+            min="2012"
+            max="2023"
+          />
+          <mat-hint mat-hint> Ano min: 2012 max: 2023 </mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Semestre Atual</mat-label>
+          <input
+            matInput
+            type="number"
+            id="semestreAtual"
+            name="semestreAtual"
+            formControlName="semestreAtual"
+            min="1"
+            max="20"
+          />
+          <mat-hint mat-hint>Semestre min: 1 max: 20 </mat-hint>
+        </mat-form-field>
+      </ng-container>
+      <ng-container
+        *ngIf="formularioCadastro.get('cargo').value === 'PROFESSOR'"
+      >
+        <mat-form-field appearance="outline" class="input-33">
+          <mat-label>Área de Atuação</mat-label>
+          <input
+            matInput
+            type="text"
+            id="areaAtuacao"
+            name="areaAtuacao"
+            formControlName="areaAtuacao"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="input-42">
+          <mat-label>Disciplinas Ministradas</mat-label>
+          <input
+            matInput
+            type="text"
+            id="disciplinasMinistradas"
+            name="disciplinasMinistradas"
+            formControlName="disciplinasMinistradas"
+          />
+        </mat-form-field>
+      </ng-container>
+
+      <mat-form-field appearance="outline" class="input-75" [displayWith]="displayFnArea">
+        <mat-label>Áreas Interesse</mat-label>
+        <mat-select formControlName="areasInteresse" multiple>
+          <mat-select-trigger>
+            <ng-container *ngIf="areasInteresse.value && areasInteresse.value.length > 0">
+              {{ getSelectedAreas() }}
+            </ng-container>
+          </mat-select-trigger>
+          <mat-option *ngFor="let area of areas" [value]="area">{{ area.area }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="input-25">
+          <mat-label>Usuário</mat-label>
+          <input
+            matInput
+            type="text"
+            id="usuario"
+            name="usuario"
+            formControlName="usuario"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="input-25">
+          <mat-label>Senha</mat-label>
+          <input
+            matInput
+            type="password"
+            id="senha"
+            name="senha"
+            formControlName="senha"
+          />
+          <!-- <mat-error *ngIf="senha.hasError('required')">
+                        Campo senha obrigatório!
+                    </mat-error> -->
+        </mat-form-field>
+      </div>
+
+      <!-- <div class="form-row">
+                <mat-form-field appearance="outline" class="input-25">
+                    <mat-label>Comfirmar Senha</mat-label>
+                    <input matInput type="password" id="confirmarSenha" name="confirmarSenha" formControlName="confirmarSenha">
+                    <mat-error *ngIf="confirmarSenha.hasError('required')">
+                        Campo confirmar senha obrigatório!
+                    </mat-error>
+                </mat-form-field>
+            </div> -->
+
+      <div class="button-cadastro">
+        <button mat-raised-button color="primary" (click)="cadastro()">
+          cadastrar
+        </button>
+      </div>
+    </mat-card>
+  </form>
+</div>

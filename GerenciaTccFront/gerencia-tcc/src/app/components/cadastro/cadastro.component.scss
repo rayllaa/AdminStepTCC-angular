@@ -1,0 +1,33 @@
+.cadastro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: medium;
+    text-align: center;
+    margin-top: 2%;
+}
+
+.mat-card{
+    width: 70%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.button-cadastro{
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    margin: 60px 5% 40px 40px;
+   
+}
+
+
+mat-radio-button {
+    margin: 20px 20px 35px ;
+}
+
+.div{
+    display: inline;
+}

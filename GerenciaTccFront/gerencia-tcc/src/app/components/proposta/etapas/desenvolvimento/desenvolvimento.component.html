@@ -1,0 +1,75 @@
+<ng-container *ngIf="!tccEmAndamento">
+  <mat-card class="card-alert" *ngIf="usuario.cargo == 'PROFESSOR' || usuario.cargo == 'COORDENADOR'">
+    Ainda não foi registrado o início do desenvolvimento do TCC!
+    <span>Deseja cadastrar?</span>
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="exibirFormularioCadastroDesenvolvimento()"
+    >
+      cadastrar
+    </button>
+  </mat-card>
+  <mat-card class="card-alert" *ngIf="usuario.cargo == 'ALUNO'">
+    Ainda não foi registrado o início do desenvolvimento do TCC!
+  </mat-card>
+</ng-container>
+
+<ng-container *ngIf="tccEmAndamento">
+  <form [formGroup]="formularioDesenvolvimento">
+    <mat-card class="card-form-proposta">
+      <h2>Cadastro andamento do desenvolvimento</h2>
+
+      <mat-form-field appearance="outline" class="input-15">
+        <mat-label>Data início</mat-label>
+        <input
+          matInput
+          type="date"
+          id="dataInicioDesenvolvimento"
+          name="dataInicioDesenvolvimento"
+          formControlName="dataInicioDesenvolvimento"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="input-15">
+        <mat-label>Data final</mat-label>
+        <input
+          matInput
+          type="date"
+          id="dataFinalDesenvolvimento"
+          name="dataFinalDesenvolvimento"
+          formControlName="dataFinalDesenvolvimento"
+        />
+      </mat-form-field>
+      <div class="button">
+        <button
+          *ngIf="proposta.statusEtapaDesenvolvimento != null && proposta.statusEtapaDesenvolvimento == false && (usuario.cargo == 'PROFESSOR' || usuario.cargo == 'COORDENADOR')"
+          mat-raised-button
+          color="primary"
+          type="submit"
+          (click)="cadastrarDesenvolvimento()"
+        >
+          cadastrar
+        </button>
+        <button
+          *ngIf="proposta.statusEtapaDesenvolvimento != null && proposta.statusEtapaDesenvolvimento == true 
+          && proposta.statusEtapaFinalizacao == false && (usuario.cargo == 'PROFESSOR' || usuario.cargo == 'COORDENADOR')
+          && proposta.professor.id == usuario.id"
+          mat-raised-button
+          color="secundary"
+          (click)="editar(formularioDesenvolvimento)"
+        >
+          {{ btnEditar }}
+        </button>
+        <button
+          *ngIf="btnAvancarStepVisivel || proposta.statusEtapaDesenvolvimento == true"
+          mat-raised-button
+          color="primary"
+          matStepperNext class="btn-avancar"
+        >
+          avançar
+        </button>
+      </div>
+    </mat-card>
+  </form>
+</ng-container>
